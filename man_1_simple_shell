@@ -1,0 +1,55 @@
+.TH hsh 1 "September 14, 2023" "Linux" "Linux Shell User Manual"
+
+.SH NAME
+
+.B simple_shell - hsh
+- command interpreter (shell)
+
+.SH SYNOPSIS
+
+.B ./hsh
+.I COMMAND
+.I [ARGUMENT]
+
+.PP
+.SH DESCRIPTION
+
+Creates a C shell that runs in interactive and non-interactive mode, similar to the basic "sh" shell. For more details, please refer to the README.md on the Github repository at https://github.com/TheMasterTz/simple_shell/blob/main/README.md. The shell is a command that reads lines from either a file or the terminal, interprets them, and generally executes other commands. This program can be run on top of another shell.
+
+.SH INVOCATION
+
+Compile simple_shell with the GNU Compiler Collection, preferably using gcc plus the below specified flags, as per this example (note the use of the * wildcard which enables all related .c files to be compiled concurrently):
+.P
+.RS
+.B $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+.P
+.RE
+simple_shell can be run in interactive mode by entering the below command on the command line followd by "enter." Note that the prompt ("$ ") will appear and you will then be in interactive mode and able to enter commands followed by "enter."
+.P
+.RS
+.B $ ./hsh
+.P
+.RE
+simple_shell can be run in non-interactive mode through the use of shell scripts. This can involve the use of piping ('|'):
+.P
+.RS
+.B echo 'pwd' | ./hsh
+
+.SH PATH SEARCH
+
+When locating a command, the shell first looks to see if it has a shell function by that name. Then it looks for a builtin command by that name. If a builtin command is not found, one of two things happen:
+.PP
+     1.   Command names containing a slash are simply executed without performing any searches.
+.PP
+     2.   The shell searches each entry in PATH in turn for the command. The value of the PATH variable should be a series of entries separated by colons. Each entry consists of a directory name. The current directory may be indicated implicitly by an empty directory name, or explicitly by a single period.
+
+.SH BUILTINS
+
+The following builtin commands are supported:
+
+.IT
+.B env
+- prints the environment variables
+
+.B exit
+- exits the program
